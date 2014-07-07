@@ -63,7 +63,7 @@ echo -e "\n---- Install python libraries ----"
 sudo pip install gdata
 
 echo -e "\n---- Install Other Dependencies ----"
-sudo pip install graphviz ghostscript poppler-utils gcc mc bzr lptools make gevent gevent_psycopg2
+sudo pip install graphviz ghostscript poppler-utils gcc mc bzr lptools make gevent gevent_psycopg2 psycogreen
 
 echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
 sudo wget http://jaist.dl.sourceforge.net/project/wkhtmltopdf/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
