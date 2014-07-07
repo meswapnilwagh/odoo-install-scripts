@@ -23,7 +23,7 @@ OE_HOME="/opt/$OE_USER"
 OE_HOME_EXT="/opt/$OE_USER/$OE_USER-server"
 
 #Enter version for checkout "7.0" for version 7.0, "saas-4, saas-5 (opendays version) and "master" for trunk
-OE_VERSION="saas-5"
+OE_VERSION="8.0"
 
 #set the superadmin password
 OE_SUPERADMIN="superadminpassword"
@@ -55,10 +55,18 @@ echo -e "\n---- Install tool packages ----"
 sudo apt-get install wget subversion git bzr bzrtools python-pip -y
 	
 echo -e "\n---- Install python packages ----"
-sudo apt-get install python-dateutil python-feedparser python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf -y
+sudo apt-get install python-dateutil python-feedparser python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-dev python-pdftools python-setuptools python-pybabel python-imaging python-matplotlib python-reportlab-accel python-openssl python-egenix-mxdatetime python-paramiko -y
 	
 echo -e "\n---- Install python libraries ----"
 sudo pip install gdata
+
+echo -e "\n---- Install Other Dependencies ----"
+sudo pip install graphviz ghostscript postgresql-client antiword libpq-dev poppler-utils gcc mc bzr lptools make
+
+echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
+sudo wget http://jaist.dl.sourceforge.net/project/wkhtmltopdf/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
+sudo dpkg -i wkhtmltox-0.12.1_linux-trusty-amd64.deb
+sudo cp /usr/local/bin/wkhtml2pdf /usr/bin
 	
 echo -e "\n---- Create ODOO system user ----"
 sudo adduser --system --quiet --shell=/bin/bash --home=$OE_HOME --gecos 'ODOO' --group $OE_USER
@@ -88,8 +96,71 @@ sudo chmod 640 /etc/$OE_CONFIG.conf
 echo -e "* Change server config file"
 sudo sed -i s/"db_user = .*"/"db_user = $OE_USER"/g /etc/$OE_CONFIG.conf
 sudo sed -i s/"; admin_passwd.*"/"admin_passwd = $OE_SUPERADMIN"/g /etc/$OE_CONFIG.conf
-sudo su root -c "echo 'logfile = /var/log/$OE_USER/$OE_CONFIG$1.log' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'addons_path=$OE_HOME_EXT/addons,$OE_HOME/custom/addons' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '[options]' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '## Server startup config - Common options' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# Admin password for creating, restoring and backing up databases admin_passwd = admin' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# specify additional addons paths (separated by commas)' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '## XML-RPC / HTTP - XML-RPC Configuration' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'sudo su root -c "echo '[options]' >> /etc/$OE_CONFIG.conf"' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'xmlrpc = True' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# Specify the TCP IP address for the XML-RPC protocol. The empty string binds to all interfaces.' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'xmlrpc_interface = ' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# specify the TCP port for the XML-RPC protocol' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'xmlrpc_port = 8069' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# Enable correct behavior when behind a reverse proxy' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'proxy_mode = True' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '## XML-RPC / HTTPS - XML-RPC Secure Configuration' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# disable the XML-RPC Secure protocol' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'xmlrpcs = True' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# Specify the TCP IP address for the XML-RPC Secure protocol. The empty string binds to all interfaces.' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'xmlrpcs_interface = ' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# specify the TCP port for the XML-RPC Secure protocol' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'xmlrpcs_port = 8071' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# specify the certificate file for the SSL connection' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'secure_cert_file = server.cert' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# specify the private key file for the SSL connection' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'secure_pkey_file = server.pkey' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '## NET-RPC - NET-RPC Configuration' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# enable the NETRPC protocol' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'netrpc = False' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# specify the TCP IP address for the NETRPC protocol' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'netrpc_interface = 127.0.0.1' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# specify the TCP port for the NETRPC protocol' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'netrpc_port = 8070' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '## WEB - Web interface Configuration' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# Filter listed database REGEXP' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'dbfilter = .*' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '## Static HTTP - Static HTTP service' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# enable static HTTP service for serving plain HTML files' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'static_http_enable = False' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# specify the directory containing your static HTML files (e.g '/var/www/')' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'static_http_document_root = None' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# specify the URL root prefix where you want web browsers to access your static HTML files (e.g '/')' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'static_http_url_prefix = None' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '## Testing Group - Testing Configuration' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# Launch a YML test file.' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'test_file = False' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# If set, will save sample of all reports in this directory.' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'test_report_directory = False' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# Enable YAML and unit tests.' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '## Server startup config - Common options' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'test_disable = False' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# Commit database changes performed by YAML or XML tests.' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'test_commit = False' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '## Logging Group - Logging Configuration' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# file where the server log will be stored (default = None)' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'logfile = /var/log/$OE_USER/$OE_CONFIG$1.log' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# do not rotate the logfile' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'logrotate = True' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# Send the log to the syslog server' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'syslog = False' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# setup a handler at LEVEL for a given PREFIX. An empty PREFIX indicates the root logger. This option can be repeated. Example: "openerp.orm:DEBUG" or "werkzeug:CRITICAL" (default: ":INFO")' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'log_handler = ["[':INFO']"]' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '# specify the level of the logging. Accepted values: info, debug_rpc, warn, test, critical, debug_sql, error, debug, debug_rpc_answer, notset' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo '#log_level = debug' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'log_level = info' >> /etc/$OE_CONFIG.conf"
+
 
 echo -e "* Create startup file"
 sudo su root -c "echo '#!/bin/sh' >> $OE_HOME_EXT/start.sh"
@@ -181,4 +252,10 @@ echo -e "* Start ODOO on Startup"
 sudo update-rc.d $OE_CONFIG defaults
  
 echo "Done! The ODOO server can be started with /etc/init.d/$OE_CONFIG"
+echo "The server will now reboot to make sure Wkhtmltopdf is working with your Odoo install"
+echo "Would you like to reboot now"
+select yn in "Yes" "No"
+case $yn in
+    Yes ) sudo shutdown -r now;;
+    No ) exit;;
 
