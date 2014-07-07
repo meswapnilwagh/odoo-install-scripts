@@ -63,7 +63,7 @@ echo -e "\n---- Install python libraries ----"
 sudo pip install gdata
 
 echo -e "\n---- Install Other Dependencies ----"
-sudo pip install graphviz ghostscript poppler-utils gcc mc bzr lptools make
+sudo pip install graphviz ghostscript poppler-utils gcc mc bzr lptools make gevent gevent_psycopg2
 
 echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
 sudo wget http://jaist.dl.sourceforge.net/project/wkhtmltopdf/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
@@ -167,7 +167,7 @@ sudo su root -c "echo 'log_level = info' >> /etc/$OE_CONFIG.conf"
 
 echo -e "* Create startup file"
 sudo su root -c "echo '#!/bin/sh' >> $OE_HOME_EXT/start.sh"
-sudo su root -c "echo 'sudo -u $OE_USER $OE_HOME_EXT/openerp-server --config=/etc/$OE_CONFIG.conf' >> $OE_HOME_EXT/start.sh"
+sudo su root -c "echo 'sudo -u $OE_USER $OE_HOME_EXT/$OE_SERVERTYPE --config=/etc/$OE_CONFIG.conf' >> $OE_HOME_EXT/start.sh"
 sudo chmod 755 $OE_HOME_EXT/start.sh
 
 #--------------------------------------------------
@@ -259,12 +259,6 @@ sudo ufw allow 8069
 echo -e "* Start ODOO on Startup"
 sudo update-rc.d $OE_CONFIG defaults
 
-echo "Would you like to install optional Odoo Design Themes for CMS and E-commerce?"
-select yn in "Yes" "No"
-case $yn in
-    Yes ) git clone https://github.com/odoo/design-themes.git /opt/odoo/custom/addons/;;
-    No ) ;;
- 
 echo "Done! The ODOO server can be started with /etc/init.d/$OE_CONFIG"
 echo "The server will now reboot to make sure Wkhtmltopdf is working with your Odoo install"
 echo "Would you like to reboot now"
