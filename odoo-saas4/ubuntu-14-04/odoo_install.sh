@@ -21,6 +21,8 @@
 OE_USER="odoo"
 OE_HOME="/opt/$OE_USER"
 OE_HOME_EXT="/opt/$OE_USER/$OE_USER-server"
+# Replace for openerp-gevent for enabling gevent mode for chat
+OE_SERVERTYPE="openerp-gevent"
 
 #Enter version for checkout "7.0" for version 7.0, "saas-4, saas-5 (opendays version) and "master" for trunk
 OE_VERSION="8.0"
@@ -55,13 +57,13 @@ echo -e "\n---- Install tool packages ----"
 sudo apt-get install wget subversion git bzr bzrtools python-pip -y
 	
 echo -e "\n---- Install python packages ----"
-sudo apt-get install python-dateutil python-feedparser python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-dev python-pdftools python-setuptools python-pybabel python-imaging python-matplotlib python-reportlab-accel python-openssl python-egenix-mxdatetime python-paramiko -y
+sudo apt-get install python-dateutil python-feedparser python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-dev python-pdftools python-setuptools python-pybabel python-imaging python-matplotlib python-reportlab-accel python-openssl python-egenix-mxdatetime python-paramiko antiword -y
 	
 echo -e "\n---- Install python libraries ----"
 sudo pip install gdata
 
 echo -e "\n---- Install Other Dependencies ----"
-sudo pip install graphviz ghostscript antiword libpq-dev poppler-utils gcc mc bzr lptools make
+sudo pip install graphviz ghostscript libpq-dev poppler-utils gcc mc bzr lptools make
 
 echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
 sudo wget http://jaist.dl.sourceforge.net/project/wkhtmltopdf/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
@@ -186,7 +188,7 @@ echo '# Short-Description: Enterprise Business Applications' >> ~/$OE_CONFIG
 echo '# Description: ODOO Business Applications' >> ~/$OE_CONFIG
 echo '### END INIT INFO' >> ~/$OE_CONFIG
 echo 'PATH=/bin:/sbin:/usr/bin' >> ~/$OE_CONFIG
-echo "DAEMON=$OE_HOME_EXT/openerp-server" >> ~/$OE_CONFIG
+echo "DAEMON=$OE_HOME_EXT/$OE_SERVERTYPE" >> ~/$OE_CONFIG
 echo "NAME=$OE_CONFIG" >> ~/$OE_CONFIG
 echo "DESC=$OE_CONFIG" >> ~/$OE_CONFIG
 echo '' >> ~/$OE_CONFIG
@@ -248,6 +250,11 @@ echo -e "* Security Init File"
 sudo mv ~/$OE_CONFIG /etc/init.d/$OE_CONFIG
 sudo chmod 755 /etc/init.d/$OE_CONFIG
 sudo chown root: /etc/init.d/$OE_CONFIG
+
+echo -e "* Open ports in UFW for openerp-gevent"
+sudo ufw allow 8072
+echo -e "* Open ports in UFW for openerp-server"
+sudo ufw allow 8069
 
 echo -e "* Start ODOO on Startup"
 sudo update-rc.d $OE_CONFIG defaults
