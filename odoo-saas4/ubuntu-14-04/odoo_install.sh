@@ -61,12 +61,13 @@ echo -e "\n---- Install python libraries ----"
 sudo pip install gdata
 
 echo -e "\n---- Install Other Dependencies ----"
-sudo pip install graphviz ghostscript postgresql-client antiword libpq-dev poppler-utils gcc mc bzr lptools make
+sudo pip install graphviz ghostscript antiword libpq-dev poppler-utils gcc mc bzr lptools make
 
 echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
 sudo wget http://jaist.dl.sourceforge.net/project/wkhtmltopdf/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
 sudo dpkg -i wkhtmltox-0.12.1_linux-trusty-amd64.deb
-sudo cp /usr/local/bin/wkhtml2pdf /usr/bin
+sudo cp /usr/local/bin/wkhtmltopdf /usr/bin
+sudo cp /usr/local/bin/wkhtmltoimage /usr/bin
 	
 echo -e "\n---- Create ODOO system user ----"
 sudo adduser --system --quiet --shell=/bin/bash --home=$OE_HOME --gecos 'ODOO' --group $OE_USER
@@ -89,7 +90,7 @@ echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
 echo -e "* Create server config file"
-sudo cp $OE_HOME_EXT/setup/debian/openerp-server.conf /etc/$OE_CONFIG.conf
+sudo touch /etc/$OE_CONFIG.conf
 sudo chown $OE_USER:$OE_USER /etc/$OE_CONFIG.conf
 sudo chmod 640 /etc/$OE_CONFIG.conf
 
