@@ -48,7 +48,6 @@ sudo apt-get install ssh -y
 # Install SSH
 #--------------------------------------------------
 echo -e "\n---- Set Perl Locale ----"
-echo -e 'LANG=en_US.UTF-8\nLC_ALL=en_US.UTF-8' > /etc/default/locale
 sudo locale-gen en_US.UTF-8
 sudo dpkg-reconfigure locales
 
