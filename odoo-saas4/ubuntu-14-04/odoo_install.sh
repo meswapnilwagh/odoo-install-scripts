@@ -97,10 +97,10 @@ sudo chown $OE_USER:$OE_USER /etc/$OE_CONFIG.conf
 sudo chmod 640 /etc/$OE_CONFIG.conf
 
 echo -e "* Change server config file"
+sudo su root -c "echo '[options]' >> /etc/$OE_CONFIG.conf"
 sudo sed -i s/"db_user = .*"/"db_user = $OE_USER"/g /etc/$OE_CONFIG.conf
 sudo sed -i s/"; admin_passwd.*"/"admin_passwd = $OE_SUPERADMIN"/g /etc/$OE_CONFIG.conf
 sudo su root -c "echo 'addons_path=$OE_HOME_EXT/addons,$OE_HOME/custom/addons,$OE_HOME/custom/addons/design-themes' >> /etc/$OE_CONFIG.conf"
-sudo su root -c "echo '[options]' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '## Server startup config - Common options' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# Admin password for creating, restoring and backing up databases admin_passwd = admin' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# specify additional addons paths (separated by commas)' >> /etc/$OE_CONFIG.conf"
@@ -260,10 +260,4 @@ echo -e "* Start ODOO on Startup"
 sudo update-rc.d $OE_CONFIG defaults
 
 echo "Done! The ODOO server can be started with /etc/init.d/$OE_CONFIG"
-echo "The server will now reboot to make sure Wkhtmltopdf is working with your Odoo install"
-echo "Would you like to reboot now"
-select yn in "Yes" "No"
-case $yn in
-    Yes ) sudo shutdown -r now;;
-    No ) exit;;
-
+echo "Please reboot the server now so that Wkhtmltopdf is working with your install."
