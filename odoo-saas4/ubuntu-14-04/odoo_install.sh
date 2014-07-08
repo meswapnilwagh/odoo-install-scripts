@@ -39,6 +39,12 @@ sudo apt-get update
 sudo apt-get upgrade -y
 
 #--------------------------------------------------
+# Install SSH
+#--------------------------------------------------
+echo -e "\n---- Install SSH Server ----"
+sudo apt-get install ssh -y
+
+#--------------------------------------------------
 # Install PostgreSQL Server
 #--------------------------------------------------
 echo -e "\n---- Install PostgreSQL Server ----"
