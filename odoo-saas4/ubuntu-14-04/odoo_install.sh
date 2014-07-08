@@ -116,15 +116,18 @@ echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
 echo -e "* Create server config file"
-sudo cp /opt/odoo/odoo-server/debian/openerp-server.conf /etc/$OE_CONFIG.conf
+sudo touch /etc/$OE_CONFIG.conf
 sudo chown $OE_USER:$OE_USER /etc/$OE_CONFIG.conf
 sudo chmod 640 /etc/$OE_CONFIG.conf
 
 echo -e "* Change server config file"
 sudo su root -c "echo '[options]' >> /etc/$OE_CONFIG.conf"
+sudo sed -i s/"db_host = .*"/"db_user = False"/g /etc/$OE_CONFIG.conf
+sudo sed -i s/"db_host = .*"/"db_port = False"/g /etc/$OE_CONFIG.conf
 sudo sed -i s/"db_user = .*"/"db_user = $OE_USER"/g /etc/$OE_CONFIG.conf
+sudo sed -i s/"db_password = .*"/"db_user = False"/g /etc/$OE_CONFIG.conf
 sudo sed -i s/"; admin_passwd.*"/"admin_passwd = $OE_SUPERADMIN"/g /etc/$OE_CONFIG.conf
-sudo su root -c "echo 'addons_path=$OE_HOME_EXT/addons,$OE_HOME/custom/addons,$OE_HOME/custom/addons/design-themes' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'addons_path = $OE_HOME_EXT/addons,$OE_HOME/custom/addons' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '## Server startup config - Common options' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# Admin password for creating, restoring and backing up databases admin_passwd = admin' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# specify additional addons paths (separated by commas)' >> /etc/$OE_CONFIG.conf"
