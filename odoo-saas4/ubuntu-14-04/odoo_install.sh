@@ -44,6 +44,18 @@ sudo su root -c "echo 'LANG="en_US.UTF-8"' >> /etc/default/locale"
 sudo su root -c "echo 'LANGUAGE="en_US:en"' >> /etc/default/locale"
 
 #--------------------------------------------------
+# Install PostgreSQL Server
+#--------------------------------------------------
+echo -e "\n---- Install PostgreSQL Server ----"
+sudo apt-get install postgresql -Y
+
+echo -e "\n---- PostgreSQL $PG_VERSION Settings  ----"
+sudo sed -i s/"#listen_addresses = 'localhost'"/"listen_addresses = '*'"/g /etc/postgresql/9.3/main/postgresql.conf
+
+echo -e "\n---- Creating the ODOO PostgreSQL User  ----"
+sudo su - postgres -c "createuser -s $OE_USER" 2> /dev/null || true
+
+#--------------------------------------------------
 # Update Server
 #--------------------------------------------------
 echo -e "\n---- Update Server ----"
@@ -57,31 +69,18 @@ echo -e "\n---- Install SSH Server ----"
 sudo apt-get install ssh -y
 
 #--------------------------------------------------
-# Install PostgreSQL Server
-#--------------------------------------------------
-echo -e "\n---- Install PostgreSQL Server ----"
-sudo apt-get install postgresql-9.3 -y 
-
-	
-echo -e "\n---- PostgreSQL $PG_VERSION Settings  ----"
-sudo sed -i s/"#listen_addresses = 'localhost'"/"listen_addresses = '*'"/g /etc/postgresql/9.3/main/postgresql.conf
-
-echo -e "\n---- Creating the ODOO PostgreSQL User  ----"
-sudo su - postgres -c "createuser -s $OE_USER" 2> /dev/null || true
-
-#--------------------------------------------------
 # Install Dependencies
 #--------------------------------------------------
 echo -e "\n---- Install tool packages ----"
 sudo apt-get install wget subversion git bzr bzrtools python-pip -y
 
 echo -e "\n---- Install and Upgrade pip and virtualenv ----"
-sudo apt-get install python-pip python-dev build-essential -y
+sudo apt-get install python-dev build-essential -y
 sudo pip install --upgrade pip
 sudo pip install --upgrade virtualenv
 	
 echo -e "\n---- Install python packages ----"
-sudo apt-get install python-gevent python-dateutil python-feedparser python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-dev python-pdftools python-setuptools python-pybabel python-imaging python-matplotlib python-reportlab-accel python-openssl python-egenix-mxdatetime python-paramiko antiword libpq-dev python-decorator poppler-utils -y
+sudo apt-get install python-gevent python-dateutil python-feedparser python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-pdftools python-setuptools python-pybabel python-imaging python-matplotlib python-reportlab-accel python-openssl python-egenix-mxdatetime python-paramiko antiword python-decorator poppler-utils -y
 	
 echo -e "\n---- Install python libraries ----"
 sudo pip install gdata
