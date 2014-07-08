@@ -116,7 +116,7 @@ echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
 echo -e "* Create server config file"
-sudo touch /etc/$OE_CONFIG.conf
+sudo cp /opt/odoo/odoo-server/debian/openerp-server.conf /etc/$OE_CONFIG.conf
 sudo chown $OE_USER:$OE_USER /etc/$OE_CONFIG.conf
 sudo chmod 640 /etc/$OE_CONFIG.conf
 
@@ -129,7 +129,6 @@ sudo su root -c "echo '## Server startup config - Common options' >> /etc/$OE_CO
 sudo su root -c "echo '# Admin password for creating, restoring and backing up databases admin_passwd = admin' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# specify additional addons paths (separated by commas)' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '## XML-RPC / HTTP - XML-RPC Configuration' >> /etc/$OE_CONFIG.conf"
-sudo su root -c "echo 'sudo su root -c "echo '[options]' >> /etc/$OE_CONFIG.conf"' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'xmlrpc = True' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# Specify the TCP IP address for the XML-RPC protocol. The empty string binds to all interfaces.' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo 'xmlrpc_interface = ' >> /etc/$OE_CONFIG.conf"
@@ -285,6 +284,9 @@ sudo ufw allow 8069
 
 echo -e "* Start ODOO on Startup"
 sudo update-rc.d $OE_CONFIG defaults
+
+echo -e "* cloning design-themes from github.com/odoo/design-themes"
+sudo git clone https://github.com/odoo/design-themes.git /opt/odoo/custom/addons/
 
 echo "Done! The ODOO server can be started with /etc/init.d/$OE_CONFIG"
 echo "Please reboot the server now so that Wkhtmltopdf is working with your install."
