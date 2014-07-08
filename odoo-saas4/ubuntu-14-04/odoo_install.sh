@@ -60,7 +60,7 @@ sudo apt-get install ssh -y
 # Install PostgreSQL Server
 #--------------------------------------------------
 echo -e "\n---- Install PostgreSQL Server ----"
-sudo apt-get install postgresql postgresql-contrib -y
+sudo apt-get install postgresql-9.3 postgresql-contrib -y
 
 	
 echo -e "\n---- PostgreSQL $PG_VERSION Settings  ----"
