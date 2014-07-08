@@ -38,7 +38,6 @@ echo -e "\n---- Set en_US.UTF-8 Locale ----"
 sudo cp /etc/default/locale /etc/default/locale.BACKUP
 sudo rm -rf /etc/default/locale
 echo -e "* Change server config file"
-sudo su root -c "echo '[options]' >> /etc/default/locale"
 sudo su root -c "echo 'LC_ALL="en_US.UTF-8"' >> /etc/default/locale"
 sudo su root -c "echo 'LANG="en_US.UTF-8"' >> /etc/default/locale"
 sudo su root -c "echo 'LANGUAGE="en_US:en"' >> /etc/default/locale"
