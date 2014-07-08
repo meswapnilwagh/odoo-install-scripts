@@ -45,6 +45,12 @@ echo -e "\n---- Install SSH Server ----"
 sudo apt-get install ssh -y
 
 #--------------------------------------------------
+# Install SSH
+#--------------------------------------------------
+echo -e "\n---- Set Perl Locale ----"
+sudo locale-gen en_US.UTF-8
+
+#--------------------------------------------------
 # Install PostgreSQL Server
 #--------------------------------------------------
 echo -e "\n---- Install PostgreSQL Server ----"
@@ -64,17 +70,17 @@ sudo apt-get install wget subversion git bzr bzrtools python-pip -y
 
 echo -e "\n---- Install and Upgrade pip and virtualenv ----"
 sudo apt-get install python-pip python-dev build-essential -y
-sudo pip install --upgrade pip -y
-sudo pip install --upgrade virtualenv -y
+sudo pip install --upgrade pip
+sudo pip install --upgrade virtualenv
 	
 echo -e "\n---- Install python packages ----"
 sudo apt-get install python-dateutil python-feedparser python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-dev python-pdftools python-setuptools python-pybabel python-imaging python-matplotlib python-reportlab-accel python-openssl python-egenix-mxdatetime python-paramiko antiword libpq-dev python-decorator poppler-utils -y
 	
 echo -e "\n---- Install python libraries ----"
-sudo pip install gdata -y
+sudo pip install gdata
 
 echo -e "\n---- Install Other Dependencies ----"
-sudo pip install graphviz ghostscript gcc mc bzr lptools make gevent gevent_psycopg2 psycogreen -y
+sudo pip install graphviz ghostscript gcc mc bzr lptools make gevent gevent_psycopg2 psycogreen
 
 echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
 sudo wget http://jaist.dl.sourceforge.net/project/wkhtmltopdf/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
