@@ -48,7 +48,9 @@ sudo apt-get install ssh -y
 # Install SSH
 #--------------------------------------------------
 echo -e "\n---- Set Perl Locale ----"
+echo -e 'LANG=en_US.UTF-8\nLC_ALL=en_US.UTF-8' > /etc/default/locale
 sudo locale-gen en_US.UTF-8
+sudo dpkg-reconfigure locales
 
 #--------------------------------------------------
 # Install PostgreSQL Server
@@ -74,13 +76,14 @@ sudo pip install --upgrade pip
 sudo pip install --upgrade virtualenv
 	
 echo -e "\n---- Install python packages ----"
-sudo apt-get install python-dateutil python-feedparser python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-dev python-pdftools python-setuptools python-pybabel python-imaging python-matplotlib python-reportlab-accel python-openssl python-egenix-mxdatetime python-paramiko antiword libpq-dev python-decorator poppler-utils -y
+sudo apt-get install python-gevent python-dateutil python-feedparser python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-dev python-pdftools python-setuptools python-pybabel python-imaging python-matplotlib python-reportlab-accel python-openssl python-egenix-mxdatetime python-paramiko antiword libpq-dev python-decorator poppler-utils -y
 	
 echo -e "\n---- Install python libraries ----"
 sudo pip install gdata
 
 echo -e "\n---- Install Other Dependencies ----"
-sudo pip install graphviz ghostscript gcc mc bzr lptools make gevent gevent_psycopg2 psycogreen
+sudo pip install graphviz ghostscript gcc mc bzr lptools make
+sudo pip install gevent gevent_psycopg2 psycogreen
 
 echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
 sudo wget http://jaist.dl.sourceforge.net/project/wkhtmltopdf/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
