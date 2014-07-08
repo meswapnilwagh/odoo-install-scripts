@@ -32,6 +32,18 @@ OE_SUPERADMIN="superadminpassword"
 OE_CONFIG="$OE_USER-server"
 
 #--------------------------------------------------
+# Set Locale en_US.UTF-8
+#--------------------------------------------------
+echo -e "\n---- Set en_US.UTF-8 Locale ----"
+sudo cp /etc/default/locale /etc/default/locale.BACKUP
+sudo rm -rf /etc/default/locale
+echo -e "* Change server config file"
+sudo su root -c "echo '[options]' >> /etc/default/locale"
+sudo su root -c "echo 'LC_ALL="en_US.UTF-8"' >> /etc/default/locale"
+sudo su root -c "echo 'LANG="en_US.UTF-8"' >> /etc/default/locale"
+sudo su root -c "echo 'LANGUAGE="en_US:en"' >> /etc/default/locale"
+
+#--------------------------------------------------
 # Update Server
 #--------------------------------------------------
 echo -e "\n---- Update Server ----"
@@ -43,13 +55,6 @@ sudo apt-get upgrade -y
 #--------------------------------------------------
 echo -e "\n---- Install SSH Server ----"
 sudo apt-get install ssh -y
-
-#--------------------------------------------------
-# Install SSH
-#--------------------------------------------------
-echo -e "\n---- Set Perl Locale ----"
-sudo locale-gen en_US.UTF-8
-sudo dpkg-reconfigure locales
 
 #--------------------------------------------------
 # Install PostgreSQL Server
