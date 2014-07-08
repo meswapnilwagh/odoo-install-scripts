@@ -47,8 +47,8 @@ sudo su root -c "echo 'LANGUAGE="en_US:en"' >> /etc/default/locale"
 # Update Server
 #--------------------------------------------------
 echo -e "\n---- Update Server ----"
-sudo apt-get update
 sudo apt-get upgrade -y
+sudo apt-get update
 
 #--------------------------------------------------
 # Install SSH
@@ -60,7 +60,7 @@ sudo apt-get install ssh -y
 # Install PostgreSQL Server
 #--------------------------------------------------
 echo -e "\n---- Install PostgreSQL Server ----"
-sudo apt-get install postgresql-9.3 postgresql-contrib -y
+sudo apt-get install postgresql-9.3 -y
 
 	
 echo -e "\n---- PostgreSQL $PG_VERSION Settings  ----"
