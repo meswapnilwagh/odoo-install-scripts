@@ -277,6 +277,9 @@ sudo mv ~/$OE_CONFIG /etc/init.d/$OE_CONFIG
 sudo chmod 755 /etc/init.d/$OE_CONFIG
 sudo chown root: /etc/init.d/$OE_CONFIG
 
+echo -e "* Create service   sudo service $OE_SERVERTYPE start"
+sudo update-rc.d $OE_SERVERTYPE defaults
+
 echo -e "* Open ports in UFW for openerp-gevent"
 sudo ufw allow 8072
 echo -e "* Open ports in UFW for openerp-server"
