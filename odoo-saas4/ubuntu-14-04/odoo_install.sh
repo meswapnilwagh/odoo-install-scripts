@@ -77,6 +77,13 @@ echo -e "\n---- Install and Upgrade pip and virtualenv ----"
 sudo apt-get install python-dev build-essential -y
 sudo pip install --upgrade pip
 sudo pip install --upgrade virtualenv
+
+echo -e "\n---- Install Aeroo Reporting Engine ----"
+sudo apt-get install python-genshi -y
+cd /usr/src
+bzr branch https://launchpad.net/aeroo
+bzr branch https://launchpad.net/aeroolib
+sudo apt-get install python-cairo -y
 	
 echo -e "\n---- Install python packages ----"
 sudo apt-get install python-gevent python-dateutil python-feedparser python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-pdftools python-setuptools python-pybabel python-imaging python-matplotlib python-reportlab-accel python-openssl python-egenix-mxdatetime python-paramiko antiword python-decorator poppler-utils -y
