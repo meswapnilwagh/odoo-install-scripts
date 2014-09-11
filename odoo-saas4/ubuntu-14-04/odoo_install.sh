@@ -295,7 +295,6 @@ echo -e "* Start ODOO on Startup"
 sudo update-rc.d $OE_CONFIG defaults
 
 echo -e "* cloning design-themes from github.com/odoo/design-themes"
-sudo git clone https://github.com/odoo/design-themes.git /opt/odoo/custom/addons/
 
 echo "Done! The ODOO server can be started with /etc/init.d/$OE_CONFIG"
 echo "Please reboot the server now so that Wkhtmltopdf is working with your install."
