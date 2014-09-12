@@ -89,6 +89,7 @@ sudo python setup.py install
 
 echo -e "\n---- Install python libraries ----"
 sudo pip install gdata
+sudo pip install passlib
 
 echo -e "\n---- Install Other Dependencies ----"
 sudo pip install graphviz ghostscript gcc mc bzr lptools make
