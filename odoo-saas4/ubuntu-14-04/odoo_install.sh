@@ -2,6 +2,8 @@
 ################################################################################
 # Script for Installation: ODOO Saas4/Trunk server on Ubuntu 14.04 LTS
 # Author: André Schenkels, ICTSTUDIO 2014
+# Forked & Modified by: Luke Branch
+# LibreOffice-Python 2.7 Compatibility Script Author: Holger Brunn (https://gist.github.com/hbrunn/6f4a007a6ff7f75c0f8b)
 #-------------------------------------------------------------------------------
 #  
 # This script will install ODOO Server on
@@ -41,6 +43,66 @@ echo -e "* Change server config file"
 sudo su root -c "echo 'LC_ALL="en_US.UTF-8"' >> /etc/default/locale"
 sudo su root -c "echo 'LANG="en_US.UTF-8"' >> /etc/default/locale"
 sudo su root -c "echo 'LANGUAGE="en_US:en"' >> /etc/default/locale"
+
+#--------------------------------------------------
+# START - LibreOffice-Python 2.7 Compatibility Script Author: Holger Brunn (https://gist.github.com/hbrunn/6f4a007a6ff7f75c0f8b)
+#--------------------------------------------------
+
+# we need some fixes from 14.10
+sudo add-apt-repository --enable-source ppa:libreoffice/libreoffice-4-3
+# fetch this repository
+sudo apt-get update
+# update your libreoffice installation
+sudo apt-get install libreoffice
+# get all build dependencies for libreoffice
+sudo apt-get build-dep libreoffice
+# that strangely enough doesn't come with the above
+sudo apt-get install gcj-jdk python-dev
+# get the actual source code
+cd /tmp
+apt-get source libreoffice
+# the folder name is versioned
+cd libreoffice*
+# we want to have python2
+sed -ie 's/^\(ENABLE_PYTHON2=\)n$/\1y/' debian/rules
+# and we add the package description to the control file (this is from the debian package)
+echo "
+Package: python-uno
+Provides: \${python:Provides}
+XB-Python-Version: \${python:Versions}
+Section: oldlibs
+Priority: extra
+Architecture: alpha amd64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc powerpcspe ppc64 s390 s390x sparc
+Enhances: libreoffice
+Depends: libreoffice-core (= \${binary:Version}),
+         \${misc:Depends},
+         \${python:Depends},
+         \${shlibs:Depends}
+Breaks: libreoffice-common (<< 1:3.5~), libreoffice-core (<< 1:3.5~)
+Conflicts: python3-uno, python3.3-uno
+Description: Python-UNO bridge (support for old python 2)
+ The Python-UNO bridge allows use of the standard LibreOffice API
+ with the Python scripting language. It additionally allows
+ others to develop UNO components in Python, thus Python UNO components
+ may be run within the LibreOffice process and can be called from C++
+ or the built in StarBasic scripting language.
+ .
+ This package is for compatibility with applications/libraries not ported
+ to python 3 yet. Prefer python3-uno over this.
+Homepage: http://udk.openoffice.org/python/python-bridge.html" >> debian/control
+# do the build
+dpkg-buildpackage -us -uc
+# have coffee. a lot of it
+# install updated metapackage and the script provider so as not to depend on python3-uno any more
+sudo dpkg --install ../libreoffice_*.deb ../libreoffice-script-provider-python*.deb
+# remove python3-uno
+sudo apt-get remove python3-uno
+# and finally install the package we want
+sudo dpkg --install ../python-uno*.deb
+
+#--------------------------------------------------
+# END - LibreOffice-Python 2.7 Compatibility Script Author: Holger Brunn (https://gist.github.com/hbrunn/6f4a007a6ff7f75c0f8b)
+#--------------------------------------------------
 
 #--------------------------------------------------
 # Install PostgreSQL Server
