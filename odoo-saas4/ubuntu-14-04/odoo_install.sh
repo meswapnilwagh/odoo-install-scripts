@@ -160,14 +160,6 @@ cd /tmp/aeroolib && python setup.py install
 # Install uno for Libreoffice and Aeroo Reports support
 sudo easy_install uno
 
-# Clone and setup Jamotion/aeroolib.git:
-git clone https://github.com/jamotion/aeroolib.git
-cd aeroolib
-python setup.py install
-
-# Download depending modules for Aeroo
-git clone https://github.com/Sandwych/equinox.git
-
 echo -e "\n---- Install python libraries ----"
 sudo pip install gdata
 sudo pip install passlib
@@ -215,7 +207,7 @@ sudo sed -i s/"db_host = .*"/"db_port = False"/g /etc/$OE_CONFIG.conf
 sudo sed -i s/"db_user = .*"/"db_user = $OE_USER"/g /etc/$OE_CONFIG.conf
 sudo sed -i s/"db_password = .*"/"db_user = False"/g /etc/$OE_CONFIG.conf
 sudo sed -i s/"; admin_passwd.*"/"admin_passwd = $OE_SUPERADMIN"/g /etc/$OE_CONFIG.conf
-sudo su root -c "echo 'addons_path = $OE_HOME_EXT/addons,$OE_HOME/custom/addons' >> /etc/$OE_CONFIG.conf"
+sudo su root -c "echo 'addons_path = $OE_HOME_EXT/addons,$OE_HOME/custom/addons,$OE_HOME/custom/aeroo,$OE_HOME/custom/server-tools' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '## Server startup config - Common options' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# Admin password for creating, restoring and backing up databases admin_passwd = admin' >> /etc/$OE_CONFIG.conf"
 sudo su root -c "echo '# specify additional addons paths (separated by commas)' >> /etc/$OE_CONFIG.conf"
@@ -377,6 +369,16 @@ echo -e "* Start ODOO on Startup"
 sudo update-rc.d $OE_CONFIG defaults
 
 echo -e "* cloning design-themes from github.com/odoo/design-themes"
+
+echo -e "* cloning Aeroo_reports repository from github.com/jamotion/aeroo"
+# Clone and setup Jamotion/aeroo.git:
+cd /opt/odoo/custom
+git clone https://github.com/jamotion/aeroo.git
+cd aeroo
+python setup.py install
+
+# Download depending modules for Aeroo
+git clone https://github.com/Sandwych/equinox.git
 
 echo "Done! The ODOO server can be started with /etc/init.d/$OE_CONFIG"
 echo "Please reboot the server now so that Wkhtmltopdf is working with your install."
