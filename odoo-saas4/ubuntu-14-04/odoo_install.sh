@@ -141,7 +141,7 @@ sudo pip install --upgrade pip
 sudo pip install --upgrade virtualenv
 	
 echo -e "\n---- Install python packages ----"
-sudo apt-get install -y --force-yes --no-install-recommends python-gevent python-dateutil python-feedparser python-gdata python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-pdftools python-setuptools python-pybabel python-imaging python-matplotlib python-reportlab-accel python-openssl python-egenix-mxdatetime python-paramiko antiword python-decorator poppler-utils python-requests libpq-dev python-geoip python-markupsafe python-uno postgresql-client python-passlib vim libreoffice curl openssh-server npm
+sudo apt-get install -y --force-yes --no-install-recommends python-gevent python-dateutil python-feedparser python-gdata python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-pdftools python-setuptools python-pybabel python-imaging python-matplotlib python-reportlab-accel python-openssl python-egenix-mxdatetime python-paramiko antiword python-decorator poppler-utils python-requests libpq-dev python-geoip python-markupsafe python-uno postgresql-client python-passlib vim libreoffice curl openssh-server npm python-cairo python-genshi libreoffice-script-provider-python
 
 # Install NodeJS and Less compiler needed by Odoo 8 Website - added from https://gist.github.com/rm-jamotion/d61bc6525f5b76245b50
 curl -L https://npmjs.org/install.sh | sh
@@ -151,11 +151,22 @@ npm install less
 cd /tmp && git clone https://github.com/jamotion/aeroolib.git; \
 cd /tmp/aeroolib && python setup.py install
 	
-echo -e "\n---- Install latest gdata-python-client ----"
-wget http://gdata-python-client.googlecode.com/files/gdata-2.0.17.tar.gz
-tar zxvf gdata-2.0.17.tar.gz
-cd gdata-2.0.17/
-sudo python setup.py install
+# echo -e "\n---- Install latest gdata-python-client ----"
+# wget http://gdata-python-client.googlecode.com/files/gdata-2.0.17.tar.gz
+# tar zxvf gdata-2.0.17.tar.gz
+# cd gdata-2.0.17/
+# sudo python setup.py install
+
+# Install uno for Libreoffice and Aeroo Reports support
+sudo easy_install uno
+
+# Clone and setup Jamotion/aeroolib.git:
+git clone https://github.com/jamotion/aeroolib.git
+cd aeroolib
+python setup.py install
+
+# Download depending modules for Aeroo
+git clone https://github.com/Sandwych/equinox.git
 
 echo -e "\n---- Install python libraries ----"
 sudo pip install gdata
