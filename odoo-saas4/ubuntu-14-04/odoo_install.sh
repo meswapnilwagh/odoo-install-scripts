@@ -378,13 +378,16 @@ echo -e "* cloning design-themes from github.com/odoo/design-themes"
 
 echo -e "* cloning Aeroo_reports repository from github.com/jamotion/aeroo"
 # Clone and setup Jamotion/aeroo.git:
-cd /opt/odoo/custom
+cd /opt/odoo/custom/addons
 git clone https://github.com/jamotion/aeroo.git
 cd aeroo
 python setup.py install
 
 # Download depending modules for Aeroo
-git clone https://github.com/Sandwych/equinox.git
+cd /opt/odoo/custom/addons
+sudo git clone https://github.com/jamotion/report_aeroo.git
+sudo git clone https://github.com/jamotion/report_aeroo_ooo.git
+sudo git clone https://github.com/jamotion/report_aeroo_sample.git
 
 echo "Done! The ODOO server can be started with /etc/init.d/$OE_CONFIG"
 echo "Please reboot the server now so that Wkhtmltopdf is working with your install."
