@@ -139,6 +139,9 @@ echo -e "\n---- Install and Upgrade pip and virtualenv ----"
 sudo apt-get install python-dev build-essential -y
 sudo pip install --upgrade pip
 sudo pip install --upgrade virtualenv
+sudo pip install pyserial
+sudo pip install qrcode
+sudo pip install pyusb
 	
 echo -e "\n---- Install python packages ----"
 sudo apt-get install -y --force-yes --no-install-recommends python-gevent python-dateutil python-feedparser python-gdata python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-pdftools python-setuptools python-pybabel python-imaging python-matplotlib python-reportlab-accel python-openssl python-egenix-mxdatetime python-paramiko antiword python-decorator poppler-utils python-requests libpq-dev python-geoip python-markupsafe python-uno postgresql-client python-passlib vim libreoffice curl openssh-server npm python-cairo python-genshi libreoffice-script-provider-python
