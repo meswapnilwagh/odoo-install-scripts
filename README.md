@@ -1,4 +1,4 @@
-openerp-install-scripts
+Odoo Install Scripts
 =======================
 
-OpenERP Install Scripts
+Odoo (Formely OpenERP) Install Scripts
