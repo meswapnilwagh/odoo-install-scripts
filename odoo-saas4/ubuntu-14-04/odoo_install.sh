@@ -175,7 +175,7 @@ sudo pip install passlib -y
 
 echo -e "\n---- Install Other Dependencies ----"
 sudo pip install graphviz ghostscript gcc mc bzr lptools make -y
-sudo pip install psycogreen gevent gevent_psycopg2 -y
+sudo pip install gevent gevent_psycopg2 psycogreen -y
 
 echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
 # curl -L to follow mirror redirect from sourceforge.net (eg. kaz.sourceforge.net...)
