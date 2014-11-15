@@ -143,7 +143,6 @@ echo -e "\n---- Install pyserial and qrcode for compatibility with hw_ modules f
 sudo pip install pyserial
 sudo pip install qrcode
 sudo apt-get -f install
-sudo pip install gevent gevent_psycopg2
 
 echo -e "\n---- Install pyusb 1.0+ not stable for compatibility with hw_escpos for receipt printer and cash drawer support in Odoo ---"
 sudo pip install --pre pyusb
@@ -175,7 +174,7 @@ sudo pip install passlib
 
 echo -e "\n---- Install Other Dependencies ----"
 sudo pip install graphviz ghostscript gcc mc bzr lptools make
-sudo pip install gevent gevent_psycopg2 psycogreen
+sudo pip install psycogreen gevent gevent_psycopg2
 
 echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
 # curl -L to follow mirror redirect from sourceforge.net (eg. kaz.sourceforge.net...)
