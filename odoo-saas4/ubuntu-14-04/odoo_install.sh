@@ -379,10 +379,10 @@ echo -e "* cloning design-themes from github.com/odoo/design-themes"
 
 echo -e "* cloning Aeroo_reports repository from github.com/jamotion/aeroo"
 # Clone and setup Jamotion/aeroo.git:
-cd /opt/odoo/custom/addons
-git clone https://github.com/jamotion/aeroo.git
-cd aeroo
-python setup.py install
+# cd /opt/odoo/custom/addons
+# git clone https://github.com/jamotion/aeroo.git
+# cd aeroo
+# python setup.py install
 
 # Download depending modules for Aeroo
 # cd /opt/odoo/custom/addons
