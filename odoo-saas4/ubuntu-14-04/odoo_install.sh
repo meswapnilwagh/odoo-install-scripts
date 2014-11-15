@@ -166,6 +166,7 @@ cd /tmp/aeroolib && python setup.py install
 
 # Install uno for Libreoffice and Aeroo Reports support
 sudo easy_install uno
+sudo easy_install -U distribute
 
 echo -e "\n---- Install python libraries ----"
 sudo pip install gdata
