@@ -137,16 +137,14 @@ sudo apt-get install wget subversion git bzr bzrtools python-pip -y
 
 echo -e "\n---- Install and Upgrade pip and virtualenv ----"
 sudo apt-get install python-dev build-essential -y
-sudo pip install --upgrade pip -y
-sudo pip install --upgrade virtualenv -y
+sudo pip install --upgrade pip
+sudo pip install --upgrade virtualenv
 echo -e "\n---- Install pyserial and qrcode for compatibility with hw_ modules for peripheral support in Odoo ---"
-sudo pip install pyserial -y
-sudo pip install qrcode -y
-sudo pip install pytz -y
+sudo pip install pyserial qrcode pytz
 sudo apt-get -f install -y
 
 echo -e "\n---- Install pyusb 1.0+ not stable for compatibility with hw_escpos for receipt printer and cash drawer support in Odoo ---"
-sudo pip install --pre pyusb -y
+sudo pip install --pre pyusb
 	
 echo -e "\n---- Install python packages ----"
 sudo apt-get install -y --force-yes --no-install-recommends python-gevent python-dateutil python-feedparser python-gdata python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-pdftools python-setuptools python-pybabel python-imaging python-matplotlib python-reportlab-accel python-openssl python-egenix-mxdatetime python-paramiko antiword python-decorator poppler-utils python-requests libpq-dev python-geoip python-markupsafe postgresql-client python-passlib vim libreoffice curl openssh-server npm python-cairo python-genshi libreoffice-script-provider-python
@@ -170,12 +168,12 @@ sudo easy_install uno -y
 sudo easy_install -U distribute -y
 
 echo -e "\n---- Install python libraries ----"
-sudo pip install gdata -y
-sudo pip install passlib -y
+sudo pip install gdata
+sudo pip install passlib
 
 echo -e "\n---- Install Other Dependencies ----"
-sudo pip install graphviz ghostscript gcc mc bzr lptools make -y
-sudo pip install gevent gevent_psycopg2 psycogreen -y
+sudo pip install graphviz ghostscript gcc mc bzr lptools make
+sudo pip install gevent gevent_psycopg2 psycogreen
 
 echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
 # curl -L to follow mirror redirect from sourceforge.net (eg. kaz.sourceforge.net...)
@@ -387,10 +385,10 @@ cd aeroo
 python setup.py install
 
 # Download depending modules for Aeroo
-cd /opt/odoo/custom/addons
-sudo git clone https://github.com/jamotion/report_aeroo.git
-sudo git clone https://github.com/jamotion/report_aeroo_ooo.git
-sudo git clone https://github.com/jamotion/report_aeroo_sample.git
+# cd /opt/odoo/custom/addons
+# sudo git clone https://github.com/jamotion/report_aeroo.git
+# sudo git clone https://github.com/jamotion/report_aeroo_ooo.git
+# sudo git clone https://github.com/jamotion/report_aeroo_sample.git
 
 echo "Done! The ODOO server can be started with /etc/init.d/$OE_CONFIG"
 echo "Please reboot the server now so that Wkhtmltopdf is working with your install."
