@@ -154,8 +154,8 @@ curl -L https://npmjs.org/install.sh | sh
 npm install less -y
 
 # Install aeroolib, which is used from aeroo reports - added from https://gist.github.com/rm-jamotion/d61bc6525f5b76245b50
-cd /tmp && git clone https://github.com/jamotion/aeroolib.git; \
-cd /tmp/aeroolib && python setup.py install
+# cd /tmp && git clone https://github.com/jamotion/aeroolib.git; \
+# cd /tmp/aeroolib && python setup.py install
 	
 # echo -e "\n---- Install latest gdata-python-client ----"
 # wget http://gdata-python-client.googlecode.com/files/gdata-2.0.17.tar.gz
