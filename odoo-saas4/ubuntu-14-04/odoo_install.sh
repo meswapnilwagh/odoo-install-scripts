@@ -121,7 +121,7 @@ sudo su - postgres -c "createuser -s $OE_USER" 2> /dev/null || true
 #--------------------------------------------------
 echo -e "\n---- Update Server ----"
 sudo apt-get upgrade -y
-sudo apt-get update
+sudo apt-get update -y
 
 #--------------------------------------------------
 # Install SSH
@@ -137,22 +137,23 @@ sudo apt-get install wget subversion git bzr bzrtools python-pip -y
 
 echo -e "\n---- Install and Upgrade pip and virtualenv ----"
 sudo apt-get install python-dev build-essential -y
-sudo pip install --upgrade pip
-sudo pip install --upgrade virtualenv
+sudo pip install --upgrade pip -y
+sudo pip install --upgrade virtualenv -y
 echo -e "\n---- Install pyserial and qrcode for compatibility with hw_ modules for peripheral support in Odoo ---"
-sudo pip install pyserial
-sudo pip install qrcode
-sudo apt-get -f install
+sudo pip install pyserial -y
+sudo pip install qrcode -y
+sudo pip install pytz -y
+sudo apt-get -f install -y
 
 echo -e "\n---- Install pyusb 1.0+ not stable for compatibility with hw_escpos for receipt printer and cash drawer support in Odoo ---"
-sudo pip install --pre pyusb
+sudo pip install --pre pyusb -y
 	
 echo -e "\n---- Install python packages ----"
 sudo apt-get install -y --force-yes --no-install-recommends python-gevent python-dateutil python-feedparser python-gdata python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-pdftools python-setuptools python-pybabel python-imaging python-matplotlib python-reportlab-accel python-openssl python-egenix-mxdatetime python-paramiko antiword python-decorator poppler-utils python-requests libpq-dev python-geoip python-markupsafe python-uno postgresql-client python-passlib vim libreoffice curl openssh-server npm python-cairo python-genshi libreoffice-script-provider-python
 
 # Install NodeJS and Less compiler needed by Odoo 8 Website - added from https://gist.github.com/rm-jamotion/d61bc6525f5b76245b50
 curl -L https://npmjs.org/install.sh | sh
-npm install less
+npm install less -y
 
 # Install aeroolib, which is used from aeroo reports - added from https://gist.github.com/rm-jamotion/d61bc6525f5b76245b50
 cd /tmp && git clone https://github.com/jamotion/aeroolib.git; \
@@ -165,16 +166,16 @@ cd /tmp/aeroolib && python setup.py install
 # sudo python setup.py install
 
 # Install uno for Libreoffice and Aeroo Reports support
-sudo easy_install uno
-sudo easy_install -U distribute
+sudo easy_install uno -y
+sudo easy_install -U distribute -y
 
 echo -e "\n---- Install python libraries ----"
-sudo pip install gdata
-sudo pip install passlib
+sudo pip install gdata -y
+sudo pip install passlib -y
 
 echo -e "\n---- Install Other Dependencies ----"
-sudo pip install graphviz ghostscript gcc mc bzr lptools make
-sudo pip install psycogreen gevent gevent_psycopg2
+sudo pip install graphviz ghostscript gcc mc bzr lptools make -y
+sudo pip install psycogreen gevent gevent_psycopg2 -y
 
 echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
 # curl -L to follow mirror redirect from sourceforge.net (eg. kaz.sourceforge.net...)
