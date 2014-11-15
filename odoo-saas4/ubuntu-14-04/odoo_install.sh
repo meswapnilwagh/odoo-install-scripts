@@ -143,6 +143,7 @@ echo -e "\n---- Install pyserial and qrcode for compatibility with hw_ modules f
 sudo pip install pyserial
 sudo pip install qrcode
 sudo pip install gevent gevent_psycopg2
+sudo apt-get -f install
 
 echo -e "\n---- Install pyusb 1.0+ not stable for compatibility with hw_escpos for receipt printer and cash drawer support in Odoo ---"
 sudo pip install --pre pyusb
