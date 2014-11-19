@@ -140,7 +140,7 @@ sudo apt-get install python-dev build-essential -y
 sudo pip install --upgrade pip
 sudo pip install --upgrade virtualenv
 echo -e "\n---- Install pyserial and qrcode for compatibility with hw_ modules for peripheral support in Odoo ---"
-sudo pip install pyserial qrcode pytz
+sudo pip install pyserial qrcode pytz jcconv
 sudo apt-get -f install -y
 
 echo -e "\n---- Install pyusb 1.0+ not stable for compatibility with hw_escpos for receipt printer and cash drawer support in Odoo ---"
