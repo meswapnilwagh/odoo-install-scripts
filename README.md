@@ -1,7 +1,10 @@
 Odoo Install Scripts
 =======================
 
-Odoo (Formely OpenERP) Install Scripts
+Odoo (Formely OpenERP) Install Scripts.
+
+> Please use the master branch for install Odoo 8.0 on Ubuntu 14.04.
+> Submit bug/issue reports here: https://github.com/lukebranch/odoo-install-scripts/issues
 
 
 TODO [master]
