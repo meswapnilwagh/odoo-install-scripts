@@ -176,8 +176,7 @@ sudo pip install graphviz ghostscript gcc mc bzr lptools make
 sudo pip install gevent gevent_psycopg2 psycogreen
 
 echo -e "\n---- Install Wkhtmltopdf 0.12.1 ----"
-# curl -L to follow mirror redirect from sourceforge.net (eg. kaz.sourceforge.net...)
-sudo wget http://kaz.dl.sourceforge.net/project/wkhtmltopdf/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
+sudo wget http://downloads.sourceforge.net/project/wkhtmltopdf/archive/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
 sudo dpkg -i wkhtmltox-0.12.1_linux-trusty-amd64.deb
 sudo cp /usr/local/bin/wkhtmltopdf /usr/bin
 sudo cp /usr/local/bin/wkhtmltoimage /usr/bin
