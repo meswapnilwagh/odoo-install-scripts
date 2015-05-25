@@ -24,7 +24,7 @@ OE_USER="odoo"
 OE_HOME="/opt/$OE_USER"
 OE_HOME_EXT="/opt/$OE_USER/$OE_USER-server"
 # Replace for openerp-gevent for enabling gevent mode for chat
-OE_SERVERTYPE="openerp-gevent"
+OE_SERVERTYPE="openerp-server"
 
 #Enter version for checkout "7.0" for version 7.0, "saas-4, saas-5 (opendays version) and "master" for trunk
 OE_VERSION="8.0"
