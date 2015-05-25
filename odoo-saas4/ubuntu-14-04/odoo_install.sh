@@ -302,3 +302,5 @@ sudo update-rc.d $OE_CONFIG defaults
 
 echo "Done! The ODOO server can be started with /etc/init.d/$OE_CONFIG"
 echo "Please reboot the server now so that Wkhtmltopdf is working with your install."
+echo "Once you've rebooted you'll be able to access your Odoo instance by going to http://[your server's IP address]:8069"
+echo "For example, if your server's IP address is 192.168.1.123 you'll be able to access it on http://192.168.1.123:8069"
