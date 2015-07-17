@@ -86,7 +86,8 @@ sudo apt-get install -y --force-yes --no-install-recommends python-gevent python
 # Install NodeJS and Less compiler needed by Odoo 8 Website - added from https://gist.github.com/rm-jamotion/d61bc6525f5b76245b50
 curl -sL https://deb.nodesource.com/setup | sudo bash -
 sudo apt-get install nodejs -y
-npm install less -y
+sudo npm -g install less globally -y
+sudo npm install -g less-plugin-clean-css globally -y
 
 echo -e "\n---- Install python libraries ----"
 sudo pip install gdata
