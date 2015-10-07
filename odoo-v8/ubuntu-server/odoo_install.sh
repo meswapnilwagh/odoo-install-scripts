@@ -34,7 +34,7 @@ OE_SERVERTYPE="openerp-server"
 
 
 #set the superadmin password
-OE_SUPERADMIN="superadminpassword"
+OE_SUPERADMIN="admin"
 OE_CONFIG="$OE_USER-server"
 
 #--------------------------------------------------

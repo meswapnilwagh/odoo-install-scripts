@@ -1,11 +1,11 @@
 #!/bin/bash
 ################################################################################
-# Script for Installation: ODOO V10 alpha server on Ubuntu Server 
+# Script for Installation: ODOO V9 server on Ubuntu Server 
 # Author: André Schenkels, ICTSTUDIO 2014
 # Forked & Modified by: Swapnil A. Wagh
 #-------------------------------------------------------------------------------
 #  
-# This script will install ODOO Trunk V10 alpha on
+# This script will install ODOO V9 on
 # clean Ubuntu Server
 #-------------------------------------------------------------------------------
 # USAGE:
@@ -26,7 +26,7 @@ fi
 
 ##fixed parameters
 #openerp
-OE_USER="odoo-trunk"
+OE_USER="odoo9"
 OE_HOME="/opt/$OE_USER"
 OE_HOME_EXT="/opt/$OE_USER/$OE_USER-server"
 # Replace for openerp-gevent for enabling gevent mode for chat
@@ -115,7 +115,7 @@ sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
 #--------------------------------------------------
 echo -e "\n==== Installing ODOO Server ===="
 sudo su $OE_USER -c "mkdir -p $OE_HOME_EXT"
-sudo wget http://nightly.odoo.com/master/nightly/src/odoo_10.0alpha1.latest.tar.gz -O $OE_USER.tar.gz
+sudo wget http://nightly.odoo.com/9.0/nightly/src/odoo_9.0.latest.tar.gz -O $OE_USER.tar.gz
 sudo tar -xvzf $OE_USER.tar.gz -C $OE_HOME_EXT --strip-components 1
 echo -e "\n---- Create custom module directory ----"
 sudo su $OE_USER -c "mkdir -p $OE_HOME_EXT/addons"
