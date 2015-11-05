@@ -81,13 +81,12 @@ echo -e "\n---- Install pyusb 1.0+ not stable for compatibility with hw_escpos f
 sudo pip install --pre pyusb
 
 echo -e "\n---- Install python packages ----"
-sudo apt-get install -y --force-yes --no-install-recommends python-gevent python-dateutil python-feedparser python-gdata python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-pdftools python-setuptools python-pybabel python-imaging python-matplotlib python-reportlab-accel python-openssl python-egenix-mxdatetime python-paramiko antiword python-decorator poppler-utils python-requests libpq-dev python-geoip python-markupsafe postgresql-client python-passlib vim libreoffice curl openssh-server npm python-cairo python-genshi libreoffice-script-provider-python
+sudo apt-get install python-dateutil python-feedparser python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-decorator python-requests python-passlib python-pil -y
 
-# Install NodeJS and Less compiler needed by Odoo 8 Website - added from https://gist.github.com/rm-jamotion/d61bc6525f5b76245b50
-curl -sL https://deb.nodesource.com/setup | sudo bash -
-sudo apt-get install nodejs -y
-sudo npm -g install less globally -y
-sudo npm install -g less-plugin-clean-css globally -y
+echo -e "\n--- Install other required packages"
+sudo apt-get install node-clean-css -y
+sudo apt-get install node-less -y
+sudo apt-get install python-gevent -y
 
 echo -e "\n---- Install python libraries ----"
 sudo pip install gdata
